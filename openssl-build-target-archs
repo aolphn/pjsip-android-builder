@@ -36,7 +36,7 @@ function getNDKForOpenSSL {
     unzip ndk.zip -d ndk
     mv ndk/$NDK_D_NAME .
     rm -rf ndk
-    rm -rf ndk.zip
+    #rm -rf ndk.zip
 
     cd $CUR_DIR
 }
@@ -50,6 +50,7 @@ function clearBuildDirectory {
 function clearNdkDirectory {
     rm -rf $NDK_PATH
 }
+
 
 
 ##############################################################################
@@ -73,11 +74,11 @@ for arch in "${TARGET_ARCHS[@]}"
 do
     echo "Building OpenSSL for target arch $arch ..."
     ./openssl-build ${NDK_PATH} ${OPENSSL_PATH} ${OPENSSL_TARGET_NDK_LEVEL} \
-                    ${arch} ${GCC_VERSION} "${LIB_PATH}/${arch}" \
-                    >> "${LOG_PATH}/${arch}.log" 2>&1
+                    ${arch} ${GCC_VERSION} "${LIB_PATH}/${arch}"
 done
 
 # Clearing the NDK version for OpenSSL
-clearNdkDirectory
+# do not clear it 2019年6月3日 10:56:53 by aolphn
+#clearNdkDirectory
 
 echo "Finished building OpenSSL! Check output folder: ${OPENSSL_BUILD_OUT_PATH}"
