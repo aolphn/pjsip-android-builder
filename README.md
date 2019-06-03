@@ -61,3 +61,28 @@ If you want to build a single library, or just change it's version, you can disa
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+## Supplement
+
+Because oracle modify jdk license,so the way which install jdk by this script wasn't work any more so we need install it manually.
+Firstl, we need download it from oracle website and save .tar.gz file into local path ,like  `/home/of/jdk-8u211-linux-x64.tar.gz`
+
+
+```
+sudo mkdir /usr/lib/jvm
+cd /usr/lib/jvm
+sudo tar -xvzf /home/of/jdk-8u211-linux-x64.tar.gz
+//the add path to /etc/environment as following
+
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/jdk1.8.0_211/bin"
+JAVA_HOME="/usr/lib/jvm/jdk1.8.0_211"
+
+//execute following command to finish setting jdk environment.
+
+sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.8.0_211/bin/java" 0
+sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.8.0_211/bin/javac" 0
+sudo update-alternatives --set java /usr/lib/jvm/jdk1.8.0_211/bin/java
+sudo update-alternatives --set javac /usr/lib/jvm/jdk1.8.0_211/bin/javac
+update-alternatives --list java
+update-alternatives --list javac
+java -version
+```
